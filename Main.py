@@ -33,7 +33,6 @@ def findmonth(filedate):
 
 
 DOWNLOADS = r'c:\Users\arxhe\Downloads'
-file1 = r'c:\Users\arxhe\Downloads\2020-08'
 fileName = []
 paths = []
 ctimes = []
@@ -90,29 +89,37 @@ for item in os.listdir(DOWNLOADS):
     elif os.path.isdir(os.path.join(DOWNLOADS, item)):
         for ye in years:
             if item == years[y]:
-                dirs.append(item)
+                x = x+1
                 y = y+1
             else:
-                fileName.append(item)
                 y = y+1
-    for files in dirs:
-        dirspath = (os.path.abspath(os.path.join(DOWNLOADS, dirs[x])))
-        dirpaths.append(dirspath)
-        x = x+1
+        if x >= 1:
+            dirs.append(item)
+        else:
+            fileName.append(item)
+x = 0
+for files in dirs:
+    dirspath = (os.path.abspath(os.path.join(DOWNLOADS, dirs[x])))
+    dirpaths.append(dirspath)
+    x = x+1
 x = 0
 for files in fileName:
     path = (os.path.abspath(os.path.join(DOWNLOADS, fileName[x])))
     paths.append(path)
-    ctimes.append(os.path.getctime(paths[x]))
-    yearstr.append(datetime.fromtimestamp(ctimes[x]).strftime('%y'))
-    year.append(int(yearstr[x]))
-    monthstr.append(datetime.fromtimestamp(ctimes[x]).strftime('%m'))
-    month.append(int(monthstr[x]))
-    daystr.append(datetime.fromtimestamp(ctimes[x]).strftime('%d'))
-    day.append(int(daystr[x]))
-    temp = datetime(year[x], month[x], day[x])
-    datetimes.append(temp)
     x = x+1
+
+d = 0
+for pa in paths:
+    ctimes.append(os.path.getctime(paths[d]))
+    yearstr.append(datetime.fromtimestamp(ctimes[d]).strftime('%y'))
+    year.append(int(yearstr[d]))
+    monthstr.append(datetime.fromtimestamp(ctimes[d]).strftime('%m'))
+    month.append(int(monthstr[d]))
+    daystr.append(datetime.fromtimestamp(ctimes[d]).strftime('%d'))
+    day.append(int(daystr[d]))
+    temp = datetime(year[d], month[d], day[d])
+    datetimes.append(temp)
+    d = d+1
 
 
 z = 0
