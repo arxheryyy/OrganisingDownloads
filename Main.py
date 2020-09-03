@@ -32,7 +32,7 @@ def findmonth(filedate):
     return fmonth
 
 
-DOWNLOADS = r'c:\Users\arxhe\Downloads'
+DOWNLOADS = r'C:\Users\Archer\Downloads'
 fileName = []
 paths = []
 ctimes = []
@@ -46,8 +46,9 @@ daystr = []
 year = []
 day = []
 month = []
-years = ["Jan", "Feb", "Mar", "Apr", "May", "Jun",
+months = ["Jan", "Feb", "Mar", "Apr", "May", "Jun",
          "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"]
+current = datetime.now()
 
 
 def checkfile(fmonth):
@@ -55,8 +56,8 @@ def checkfile(fmonth):
         y = 0
         x = 0
         if os.path.isdir(os.path.join(DOWNLOADS, item)):
-            for ye in years:
-                if item == years[y]:
+            for mo in months:
+                if item == months[y]:
                     break
                 else:
                     dirs.append(item)
@@ -87,8 +88,8 @@ for item in os.listdir(DOWNLOADS):
     if os.path.isfile(os.path.join(DOWNLOADS, item)):
         fileName.append(item)
     elif os.path.isdir(os.path.join(DOWNLOADS, item)):
-        for ye in years:
-            if item == years[y]:
+        for ye in months:
+            if item == months[y]:
                 x = x+1
                 y = y+1
             else:
@@ -125,8 +126,9 @@ for pa in paths:
 z = 0
 
 for date in datetimes:
-    filedate = datetimes[z].month
-    fmonth = findmonth(filedate)
+    filemonth = datetimes[z].month
+    fmonth = findmonth(filemonth)
+    fileyear = datetimes[z].year
     bool = checkfile(fmonth)
     if bool:
         exdir = os.path.join(DOWNLOADS, fmonth)
@@ -136,3 +138,16 @@ for date in datetimes:
         newdir = createFolder(fmonth)
         shutil.move(paths[z], newdir)
         z = z+1
+    
+orged = []
+orgedpaths = []
+zx = 0
+for items in os.listdir(DOWNLOADS):
+    orged.append(items)
+for items in orged:
+    orgedpaths.append(os.path.join(DOWNLOADS, orged[zx]))
+    zx = zx + 1
+zx = 0
+for pa in orgedpaths:
+    for items in os.listdir(orgedpaths[zx]):
+    
